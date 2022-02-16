@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of listUser">
+                                <td>{{user.name}}</td>
+                                <td>{{user.lastname}}</td>
+                                <td>{{user.alias}}</td>
+                                <td>{{user.rol.role}}</td>
+                                <td *ngIf="user.active === 1" class="text-center"><a class=""><i
+                                    class="fas fa-lock-open text-primary"></i></a></td>
+                                <td *ngIf="user.active === 0">hola</td>
+                                <td>
+                                    <a data-toggle="tooltip" data-original-title="Edit" class="btnAction" data-toggle="modal"
+                                    data-target="#exampleModal" data-whatever="@mdo"
+                                        (click)="editarUsuario(user.id)"> <i
+                                            class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a data-toggle="tooltip" data-original-title="Close" class="btnAction" *ngIf="user.active===1"
+                                        (click)="borrarUsuario(user.id, 1)"> <i class="fas fa-lock text-danger"></i>
+                                    </a>
+                                    <a data-toggle="tooltip" data-original-title="Close" class="btnAction" *ngIf="user.active===0"
+                                        (click)="borrarUsuario(user.id, 0)"> <i class="fas fa-lock-open text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

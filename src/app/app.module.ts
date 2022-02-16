@@ -8,7 +8,9 @@ import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard } from './guard/auth.guard';
+import { InterceptorService } from './interceptor/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,14 @@ import { HttpClientModule } from '@angular/common/http';
     AuthModule,
     SocketIoModule.forRoot(config)
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi:true
+    }  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

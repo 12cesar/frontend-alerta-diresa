@@ -9,6 +9,10 @@ import { Grafica1Component } from './grafica1/grafica1.component';
 import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { AlertaComponent } from './alerta/alerta.component';
+import { AreaComponent } from './area/area.component';
+import { RolComponent } from './rol/rol.component';
 
 
 
@@ -17,7 +21,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
-    AdminComponent
+    AdminComponent,
+    UsuarioComponent,
+    AlertaComponent,
+    AreaComponent,
+    RolComponent
   ],
   exports:[
     DashboardComponent,

@@ -11,7 +11,7 @@ const routes: Routes = [
         component: AuthComponent,
         children: [
             { path: 'alerta', component: LoginComponent },
-            { path: 'register', component: RegisterComponent },
+            { path: 'login', component: RegisterComponent },
             { path: '', redirectTo: '/alerta', pathMatch: 'full' }
         ]
     },
