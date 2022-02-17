@@ -11,4 +11,7 @@ export class AlertaService {
   getAlertas(estado:string):Observable<any>{
     return this.http.get(`${this.url}/api/alerta`,{params:{estado}});
   }
+  postAlerta(data:FormData):Observable<any>{
+    return this.http.post(`${this.url}/api/alerta`,data);
+  }
 }

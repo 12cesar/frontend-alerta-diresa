@@ -16,6 +16,7 @@
                                 <th>Descripcion</th>
                                 <th>Area</th>
                                 <th>Atendido por</th>
+                                <th>Fecha</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
@@ -24,7 +25,9 @@
                                 <td>{{alerta.personal}}</td>
                                 <td>{{alerta.descripcion}}</td>
                                 <td>{{alerta.area.title}}</td>
-                                <td>{{alerta.user.name}} {{alerta.user.lastname}}</td>
+                                <td *ngIf="alerta.userId !== null">{{alerta.user.name}} {{alerta.user.lastname}}</td>
+                                <td *ngIf="alerta.userId === null">Sin atencion</td>
+                                <td>{{alerta.createdAt.substr(0,10)}}</td>
                                 <td *ngIf="alerta.status === 1"><a class=""><i
                                             class="fas fa-eye text-primary"></i></a></td>
                                 <td *ngIf="alerta.status === 0"><a class=""><i

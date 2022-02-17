@@ -2,7 +2,10 @@ export interface AlertNew {
     ok:     boolean;
     alerta: Alerta[];
 }
-
+export interface AlertNewInd {
+    ok:     boolean;
+    alerta: Alerta;
+}
 export interface Alerta {
     id:          number;
     personal:    string;
@@ -10,7 +13,7 @@ export interface Alerta {
     status:      number;
     createdAt:   string;
     updatedAt:   string;
-    userId:      number;
+    userId?:      number;
     areaId:      number;
     user:        User;
     area:        Area;
