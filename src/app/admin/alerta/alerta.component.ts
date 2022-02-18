@@ -39,10 +39,12 @@ export class AlertaComponent implements OnInit {
   ShowSelected(event:any){
     if (event.target.value === '1') {
       this.estado = "1";
+      this.cargar=true;
       this.mostrarAlertas();
     }
     if (event.target.value === '2') {
       this.estado = "0";
+      this.cargar=true;
       this.mostrarAlertas();
     }
   }
