@@ -26,11 +26,5 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
   registrarAlerta(){
-    console.log(this.alertaForm.get('descripcion')?.value);
-    this.alertaEnvio = {
-      area:this.alertaForm.get('area')?.value,
-      descripcion:this.alertaForm.get('descripcion')?.value
-    }
-    this.wsService.emit('agregar-alerta', this.alertaEnvio);
   }
 }

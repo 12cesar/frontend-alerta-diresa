@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { closeAlert, loadData } from 'src/app/function/cargando';
 import { ResultRol } from 'src/app/interface/rol';
 import { ResultUser, Rol, User, ResultUserInd } from 'src/app/interface/usuario';
 import { RolService } from 'src/app/servicios/rol.service';
@@ -20,6 +21,7 @@ export class UsuarioComponent implements OnInit {
   titulo: string = "Crear";
   userForm: FormGroup;
   id: string = "";
+  cargar:boolean=true;
   constructor(private userService: UsuarioService, private fb: FormBuilder, private rolService: RolService) {
     this.userForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -35,9 +37,16 @@ export class UsuarioComponent implements OnInit {
     this.mostrarRol();
   }
   mostrarUsuarios() {
+    if (this.cargar) {
+      loadData('Cargando datos!!!','Porfavor espere')
+    }
     this.userService.getUsers(this.active).subscribe(
       (data: ResultUser) => {
         this.listUser = data.user;
+        if (this.cargar) {
+          closeAlert();
+        }
+        this.cargar=false
       },
       (error) => {
         console.log(error);
@@ -57,6 +66,7 @@ export class UsuarioComponent implements OnInit {
         (data: ResultUserInd) => {
           console.log(data);
           ToastSuccess('success', 'Usuario creado con exito');
+          this.cancelar();
           this.mostrarUsuarios();
         },
         (error) => {

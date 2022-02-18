@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AreaService {
-  url="http://localhost:5000";
+  url=environment.URL_BACKEND;
   constructor(private http:HttpClient) { }
   getAreas(active:string):Observable<any>{
     return this.http.get(`${this.url}/api/area`,{params:{active}});

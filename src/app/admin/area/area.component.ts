@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { closeAlert, loadData } from 'src/app/function/cargando';
 import { ToastSuccess } from 'src/app/function/validar';
 import { AreaService } from 'src/app/servicios/area.service';
 import Swal from 'sweetalert2';
@@ -15,7 +16,8 @@ export class AreaComponent implements OnInit {
   listArea:Area[]=[];
   active: string="1";
   titulo:string="Crear";
-  id:string=""
+  id:string="";
+  cargar:boolean=true;
   areaForm:FormGroup;
   constructor(private fb:FormBuilder, private areaService:AreaService) { 
     this.areaForm = this.fb.group({
@@ -27,9 +29,16 @@ export class AreaComponent implements OnInit {
     this.mostrarAreas();
   }
   mostrarAreas(){
+    if (this.cargar) {
+      loadData('Cargando datos!!!','Porfavor espere')
+    }
     this.areaService.getAreas(this.active).subscribe(
       (data:ResultAreas)=>{
         this.listArea=data.area;
+        if (this.cargar) {
+          closeAlert()
+        }
+        this.cargar=false;
       },
       (error)=>{
         console.log(error);
