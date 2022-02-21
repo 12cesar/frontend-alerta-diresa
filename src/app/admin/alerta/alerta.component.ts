@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { closeAlert, loadData } from 'src/app/function/cargando';
 import { Alerta, AlertNew } from 'src/app/interface/alertas';
 import { AlertaService } from 'src/app/servicios/alerta.service';
+import { WebsocketService } from 'src/app/socket/websocket.service';
 
 @Component({
   selector: 'app-alerta',
@@ -13,7 +14,8 @@ export class AlertaComponent implements OnInit {
   listAlerta:Alerta[]=[];
   estado:string="1";
   cargar:boolean=true;
-  constructor(private alertaService: AlertaService) { }
+  pageActual: number = 1;
+  constructor(private alertaService: AlertaService, private wsService: WebsocketService) { }
 
   ngOnInit(): void {
     this.mostrarAlertas();
@@ -41,6 +43,7 @@ export class AlertaComponent implements OnInit {
       this.estado = "1";
       this.cargar=true;
       this.mostrarAlertas();
+      
     }
     if (event.target.value === '2') {
       this.estado = "0";

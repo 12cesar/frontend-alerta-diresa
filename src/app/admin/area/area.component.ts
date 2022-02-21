@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { closeAlert, loadData } from 'src/app/function/cargando';
 import { ToastSuccess } from 'src/app/function/validar';
 import { AreaService } from 'src/app/servicios/area.service';
+import { WebsocketService } from 'src/app/socket/websocket.service';
 import Swal from 'sweetalert2';
 import { Area, ResultAreas, ResultAreasInd } from '../../interface/areas';
 
@@ -19,7 +20,8 @@ export class AreaComponent implements OnInit {
   id:string="";
   cargar:boolean=true;
   areaForm:FormGroup;
-  constructor(private fb:FormBuilder, private areaService:AreaService) { 
+  pageActual: number = 1;
+  constructor(private fb:FormBuilder, private areaService:AreaService, private wsService: WebsocketService) { 
     this.areaForm = this.fb.group({
       titulo:['',Validators.required]
     })
@@ -54,6 +56,8 @@ export class AreaComponent implements OnInit {
           console.log(data);
           ToastSuccess('success', 'Area creado con exito');
           this.mostrarAreas();
+          this.cancelar();
+          this.wsService.emit('actualizar-area');
         },
         (error) => {
           console.log(error);

@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let area of listArea">
+                            <tr *ngFor="let area of listArea | paginate: { itemsPerPage: 10, currentPage: pageActual }">
                                 <td>{{area.title}}</td>
                                 <td *ngIf="area.active === 1"><a class=""><i
                                             class="fas fa-lock-open text-primary"></i></a></td>
@@ -45,6 +45,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="text-center" *ngIf="listArea.length > 10">
+                        <pagination-controls (pageChange)="pageActual = $event" ></pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

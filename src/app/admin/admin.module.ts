@@ -8,11 +8,14 @@ import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { AlertaComponent } from './alerta/alerta.component';
 import { AreaComponent } from './area/area.component';
 import { RolComponent } from './rol/rol.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -31,13 +34,16 @@ import { RolComponent } from './rol/rol.component';
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule,
-    ReactiveFormsModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxPaginationModule 
   ]
 })
 export class AdminModule { }

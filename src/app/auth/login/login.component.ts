@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mostrarArea()
+    this.mostrarArea();
+    this.escuchandoArea();
   }
   mostrarArea(){
     if (this.cargar === true) {
@@ -78,5 +79,17 @@ export class LoginComponent implements OnInit {
       descripcion:'',
       area:''
     })
+  }
+  escuchandoArea(){
+    this.cargar=true;
+    this.wsService.listen('actualizar-area').subscribe(
+      (data)=>{
+        this.mostrarArea();
+      },
+      (error)=>{
+        console.log(error);
+        
+      }
+    )
   }
 }
