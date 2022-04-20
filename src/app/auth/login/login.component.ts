@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   listArea:Area[]=[];
   alertaForm: FormGroup;
   cargar:boolean=true;
+  envio:boolean=false;
   constructor(private areaService:AreaService, private alertaService:AlertaService, private generalService: GeneralService, private fb: FormBuilder, private wsService:WebsocketService) { 
     this.alertaForm = this.fb.group({
       personal:['', Validators.required],
@@ -49,13 +50,15 @@ export class LoginComponent implements OnInit {
     )
   }
   enviarAlerta(){
+    this.envio = true;
     const data = new FormData();
     data.append('cliente', this.alertaForm.get('personal')?.value);
     data.append('area', this.alertaForm.get('area')?.value)
     data.append('descripcion', this.alertaForm.get('descripcion')?.value);
     this.alertaService.postAlerta(data).subscribe(
+      
       (data:AlertNewInd)=>{
-        console.log(data);
+        this.cancelar();  
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -63,8 +66,9 @@ export class LoginComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         })
-        this.cancelar();
+        
         this.wsService.emit('agregar-alerta');
+        this.envio = false;
       },
       (error)=>{
         console.log(error);
