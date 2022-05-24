@@ -60,8 +60,7 @@ export class AreaComponent implements OnInit {
           this.wsService.emit('actualizar-area');
         },
         (error) => {
-          console.log(error);
-
+          ToastSuccess('warning',error.error.errors[0].msg);
         }
       )
     }

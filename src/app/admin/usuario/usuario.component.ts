@@ -64,14 +64,13 @@ export class UsuarioComponent implements OnInit {
       formData.append('rol', this.userForm.get('rol')?.value);
       this.userService.postUser(formData).subscribe(
         (data: ResultUserInd) => {
-          console.log(data);
           ToastSuccess('success', 'Usuario creado con exito');
           this.cancelar();
           this.mostrarUsuarios();
         },
         (error) => {
-          console.log(error);
-
+          console.log(error.error.errors[0].msg);
+          ToastSuccess('warning',error.error.errors[0].msg);
         }
       )
     }
@@ -91,7 +90,6 @@ export class UsuarioComponent implements OnInit {
         },
         (error)=>{
           console.log(error);
-          
         }
       )
     }
@@ -137,7 +135,6 @@ export class UsuarioComponent implements OnInit {
           },
           (error)=>{
             console.log(error);
-            
           }
         )
         
